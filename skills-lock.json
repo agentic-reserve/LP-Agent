@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "skills": {
+    "create-agent": {
+      "source": "openrouterteam/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ced8d4f944d0b5afb803720fc4665590eda57c30adfb3ecb493726ba6c66b79c"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "25872a21881a950edc3db1f3329664d60405d539660ce05b3265db2de06a7dfd"
+    },
+    "helius": {
+      "source": "sendaifun/skills",
+      "sourceType": "github",
+      "computedHash": "d9d5e2701a11e6869da4b5e5d0cd13fd34e1020527f9b8e1a105c07079b8221b"
+    },
+    "magicblock": {
+      "source": "sendaifun/skills",
+      "sourceType": "github",
+      "computedHash": "0c0480c8755af10bf08e9061f60920a4a04f94e884354792f0b0c28bd6fca93d"
+    },
+    "openrouter-typescript-sdk": {
+      "source": "openrouterteam/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d6effb9c0f5f5361ed95976936845fd3c9e8eeef53f9214aa2e82845c708fd3f"
+    },
+    "percolator": {
+      "source": "agentic-reserve/agent_skill",
+      "sourceType": "github",
+      "computedHash": "4dee5b5fc5da957da03400d8b9fbaf32aca78b3720c4a05170f6b9256f4fcc94"
+    },
+    "solana-dev": {
+      "source": "solana-foundation/solana-dev-skill",
+      "sourceType": "github",
+      "computedHash": "4e2c6034cd0c067f0177306db5654b6d6b8f0cd319698a6e42eded7948578fd7"
+    }
+  }
+}
