@@ -5,10 +5,11 @@ import PositionsList from './PositionsList';
 import StrategiesList from './StrategiesList';
 import MLSignals from './MLSignals';
 import CreateStrategy from './CreateStrategy';
+import PerpPositions from './PerpPositions';
 
 export default function Dashboard() {
   const { publicKey, connected } = useWallet();
-  const [activeTab, setActiveTab] = useState<'positions' | 'strategies' | 'signals'>('positions');
+  const [activeTab, setActiveTab] = useState<'positions' | 'strategies' | 'signals' | 'perps'>('positions');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-hawk-darker via-hawk-dark to-hawk-darker">
@@ -55,7 +56,17 @@ export default function Dashboard() {
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
-                Positions
+                LP Positions
+              </button>
+              <button
+                onClick={() => setActiveTab('perps')}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  activeTab === 'perps'
+                    ? 'text-hawk-primary border-b-2 border-hawk-primary'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                Perp Positions
               </button>
               <button
                 onClick={() => setActiveTab('strategies')}
@@ -81,6 +92,7 @@ export default function Dashboard() {
 
             {/* Tab Content */}
             {activeTab === 'positions' && <PositionsList walletAddress={publicKey!.toString()} />}
+            {activeTab === 'perps' && <PerpPositions walletAddress={publicKey!.toString()} />}
             {activeTab === 'strategies' && (
               <div className="space-y-6">
                 <CreateStrategy walletAddress={publicKey!.toString()} />

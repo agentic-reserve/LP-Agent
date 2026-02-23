@@ -8,6 +8,7 @@ import { mlRouter } from './routes/ml.js';
 import { positionsRouter } from './routes/positions.js';
 import { strategiesRouter } from './routes/strategies.js';
 import { poolsRouter } from './routes/pools.js';
+import { percolatorRouter } from './routes/percolator.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use('/api/ml', mlRouter);
 app.use('/api/positions', positionsRouter);
 app.use('/api/strategies', strategiesRouter);
 app.use('/api/pools', poolsRouter);
+app.use('/api/percolator', percolatorRouter);
 
 // Error handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
