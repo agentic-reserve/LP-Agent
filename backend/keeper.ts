@@ -1,7 +1,7 @@
 // HawkFi Keeper - Automated rebalancing and monitoring
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
-import { createHelius } from 'helius-sdk';
+import { Helius } from 'helius-sdk';
 import { mlEnsemble } from './services/ml-ensemble.js';
 import { precisionCurve } from './services/precision-curve.js';
 import type { Database } from './types/database.js';
@@ -13,9 +13,7 @@ const supabase = createClient<Database>(
   process.env.SUPABASE_SERVICE_KEY!
 );
 
-const helius = createHelius({
-  apiKey: process.env.HELIUS_API_KEY!,
-});
+const helius = new Helius(process.env.HELIUS_API_KEY!);
 
 async function runKeeper() {
   console.log('🦅 HawkFi Keeper starting...', new Date().toISOString());
