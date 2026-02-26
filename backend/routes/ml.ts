@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { mlEnsemble } from '../services/ml-ensemble.js';
 import { supabase } from '../server.js';
+import { PriceService } from '../services/price-service.js';
 
 export const mlRouter = Router();
 
@@ -20,7 +21,14 @@ mlRouter.post('/signal/:poolId', async (req, res, next) => {
       return res.status(404).json({ error: 'Pool not found' });
     }
 
-    // Fetch price history
+    // Get real-time price from Binance
+    const currentPrice = await PriceService.getPricesForPool(pool.token_a, pool.token_b);
+
+    if (!currentPrice) {
+      return res.status(400).json({ error: 'Unable to fetch real-time price from Binance' });
+    }
+
+    // Fetch price history from DB
     const { data: priceHistory, error: historyError } = await supabase
       .from('price_history')
       .select('price, timestamp')
@@ -33,7 +41,7 @@ mlRouter.post('/signal/:poolId', async (req, res, next) => {
     // Generate ML prediction
     const prediction = await mlEnsemble.generateSignal({
       poolId,
-      currentPrice: priceHistory?.[0]?.price || 0,
+      currentPrice,
       volume24h: pool.volume_24h || 0,
       liquidity: pool.tvl || 0,
       priceHistory: priceHistory || [],
@@ -46,6 +54,7 @@ mlRouter.post('/signal/:poolId', async (req, res, next) => {
       success: true,
       signal,
       prediction,
+      priceSource: 'binance',
     });
   } catch (error: any) {
     next(error);

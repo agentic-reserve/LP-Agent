@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
-import { createHelius } from 'helius-sdk';
+import { Helius } from 'helius-sdk';
 import type { Database } from './types/database.js';
 import { mlRouter } from './routes/ml.js';
 import { positionsRouter } from './routes/positions.js';
@@ -20,9 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Helius SDK
-export const helius = createHelius({
-  apiKey: process.env.HELIUS_API_KEY!,
-});
+export const helius = new Helius(process.env.HELIUS_API_KEY!);
 
 // Initialize Supabase
 export const supabase = createClient<Database>(
